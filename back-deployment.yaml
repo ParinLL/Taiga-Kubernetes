@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose --file ../docker-compose.yml convert
+    kompose.version: 1.22.0 (955b78124)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: back
+  name: back
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: back
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose --file ../docker-compose.yml convert
+        kompose.version: 1.22.0 (955b78124)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/default: "true"
+        io.kompose.service: back
+    spec:
+      containers:
+        - envFrom:
+          - configMapRef:
+              name: variables-env
+          image: dokfish/taiga-back:6.5.2
+          ports:
+          - containerPort: 80
+          name: taiga-back
+          resources: {}
+          volumeMounts:
+            - mountPath: /taiga-media
+              name: back-media
+            - mountPath: /taiga-conf
+              name: back-conf
+      restartPolicy: Always
+      volumes:
+        - name: back-media
+          persistentVolumeClaim:
+            claimName: back-media
+        - name: back-conf
+          persistentVolumeClaim:
+            claimName: back-conf
+status: {}

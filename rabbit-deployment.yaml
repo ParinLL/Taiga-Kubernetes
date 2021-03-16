@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose --file ../docker-compose.yml convert
+    kompose.version: 1.22.0 (955b78124)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: rabbit
+  name: rabbit
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: rabbit
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose --file ../docker-compose.yml convert
+        kompose.version: 1.22.0 (955b78124)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/default: "true"
+        io.kompose.service: rabbit
+    spec:
+      containers:
+        - envFrom:
+          - configMapRef:
+              name: variables-env
+          image: dokfish/taiga-rabbit:6
+          name: taiga-rabbit
+          ports:
+            - containerPort: 5672          
+          resources: {}
+      restartPolicy: Always
+status: {}

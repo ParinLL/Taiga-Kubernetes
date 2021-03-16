@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose --file ../docker-compose.yml convert
+    kompose.version: 1.22.0 (955b78124)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: front
+  name: front
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: front
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose --file ../docker-compose.yml convert
+        kompose.version: 1.22.0 (955b78124)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/default: "true"
+        io.kompose.service: front
+    spec:
+      containers:
+        - envFrom:
+          - configMapRef:
+              name: variables-env
+          image: dokfish/taiga-front:6.1
+          ports:
+          - containerPort: 80
+          name: taiga-front
+          resources: {}
+          volumeMounts:
+            - mountPath: /taiga-conf
+              name: front-conf
+      restartPolicy: Always
+      volumes:
+        - name: front-conf
+          persistentVolumeClaim:
+            claimName: front-conf
+status: {}
