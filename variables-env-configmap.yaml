@@ -4,7 +4,7 @@ data:
   EMAIL_BACKEND: django.core.mail.backends.smtp.EmailBackend
   EMAIL_HOST: smtp.gmail.com
   EMAIL_PASSWORD: password
-  EMAIL_USER: admin@admin@example.com
+  EMAIL_USER: admin@example.com
   EMAIL_PORT: "587"
   EMAIL_USE_TLS: "True"
   ENABLE_SSL: "no"
