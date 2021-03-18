@@ -7,7 +7,7 @@
 
 此專案原本是docker-compose的方式進行部署，轉換成yaml的作法是透過
 
-[kubernetes](https://github.com/kubernetes)/**[kompose](https://github.com/kubernetes/kompose)**進行轉換
+[kubernetes](https://github.com/kubernetes)/**[kompose](https://github.com/kubernetes/kompose)**  進行轉換
 
 原本的docker-compose.yaml如下
 
@@ -176,7 +176,7 @@ INFO Kubernetes file "rabbit-deployment.yaml" created
 ```yaml
         - env:
             - name: 
-			  valueFrom:
+              valueFrom:
                 configMapKeyRef:
                 	key:
                 	name:
@@ -214,6 +214,6 @@ INFO Kubernetes file "rabbit-deployment.yaml" created
 
 yaml路徑已經放在本人的Github上
 
-請務必修改**variables-env-configmap.yaml**才能正確部署
+請務必修改**variables-env-configmap.yaml**正確部署
 
 ### [Taiga-Kubernetes](https://github.com/ParinLL/Taiga-Kubernetes)
