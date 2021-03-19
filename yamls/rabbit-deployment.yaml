@@ -28,7 +28,7 @@ spec:
         - envFrom:
           - configMapRef:
               name: variables-env
-          image: dokfish/taiga-rabbit:6
+          image: dokfish/taiga-rabbit:6.1
           name: taiga-rabbit
           ports:
             - containerPort: 5672          
