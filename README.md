@@ -21,7 +21,7 @@ docker-compose
 cd Taiga-Kubernetes/kubernetes
 ```
 
-修改[variables-env-configmap.yaml](https://github.com/ParinLL/Taiga-Kubernetes/kubernetes/variables-env-configmap.yaml) 中的變數，否則不能成功部署
+修改[variables-env-configmap.yaml](https://github.com/ParinLL/Taiga-Kubernetes/blob/main/kubernetes/variables-env-configmap.yaml) 中的變數，否則不能成功部署
 
 修改完成後，請部署當前kubernetes資料夾中的所有yaml
 
@@ -50,7 +50,7 @@ kubectl apply -f . ##或指定namespace (-n $namespace)
 cd Taiga-Kubernetes/docker-compose
 ```
 
-修改[variables.env](https://github.com/ParinLL/Taiga-Kubernetes/docker-compose/variables.envl) 中的變數，否則不能成功部署
+修改[variables.env](https://github.com/ParinLL/Taiga-Kubernetes/blob/main/docker-compose/variables.env) 中的變數，否則不能成功部署
 
 當**TAIGA_SCHEME=http** 時，TAIGA_PORT=80，ENABLE_SSL=no，proxy container會expose 80 port提供服務
 
@@ -58,7 +58,7 @@ cd Taiga-Kubernetes/docker-compose
 
 取消註解CERT_NAME，CERT_KEY，並填入crt與key的名稱
 
-修改[docker-compose.yaml](https://github.com/ParinLL/Taiga-Kubernetes/docker-compose/docker-compose.yaml) ，並修改service proxy下的值，取消註解**\- 443:443** 與**\- ./cert:/taiga-cert** 
+修改[docker-compose.yaml](https://github.com/ParinLL/Taiga-Kubernetes/blob/main/docker-compose/docker-compose.yaml) ，並修改service proxy下的值，取消註解**\- 443:443** 與**\- ./cert:/taiga-cert** 
 
 修改完成之後，使用以下指令開始部署
 
