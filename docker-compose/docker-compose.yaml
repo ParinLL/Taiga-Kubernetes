@@ -1,0 +1,81 @@
+version: '3'
+
+services:
+  back:
+    image: dokfish/taiga-back:6.6
+    container_name: taiga-back
+    restart: unless-stopped
+    depends_on:
+      - db
+      - events
+    networks:
+      - default
+    volumes:
+      - ./data/media:/taiga-media
+      - ./conf/back:/taiga-conf
+    env_file:
+      - variables.env
+
+  front:
+    image: dokfish/taiga-front:6.2
+    container_name: taiga-front
+    restart: unless-stopped
+    networks:
+      - default
+    volumes:
+      - ./conf/front:/taiga-conf
+    env_file:
+      - variables.env
+
+  events:
+    image: dokfish/taiga-events:6.2.1
+    container_name: taiga-events
+    restart: unless-stopped
+    depends_on:
+      - rabbit
+    networks:
+      - default
+    env_file:
+      - variables.env
+
+  db:
+    image: postgres:12-alpine
+    container_name: taiga-db
+    restart: unless-stopped
+    networks:
+      - default
+    env_file:
+      - variables.env
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+
+  rabbit:
+    image: dokfish/taiga-rabbit:6.1
+    container_name: taiga-rabbit
+    restart: unless-stopped
+    networks:
+      - default
+    env_file:
+      - variables.env
+
+  proxy:
+    image: dokfish/taiga-proxy:6.2
+    container_name: taiga-proxy
+    restart: unless-stopped
+    depends_on:
+      - back
+      - front
+      - events
+    networks:
+      - default
+    ports:
+      - 80:80
+     # - 443:443
+    volumes:
+     #- ./certs:/taiga-cert
+      - ./conf/proxy:/taiga-conf
+    env_file:
+      - variables.env
+
+networks:
+  default:
