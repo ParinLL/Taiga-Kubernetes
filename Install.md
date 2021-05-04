@@ -167,7 +167,7 @@ INFO Kubernetes file "rabbit-deployment.yaml" created
 
 結構如下
 
-![image-20210318112517524](C:/Users/6656/Documents/github/dock8s/Taiga/images/image-20210318112517524.png)
+![image-20210318112517524](\images\image-20210318112517524.png)
 
 其中做比較多的修改為service的部分，因為docker compose在同一個network下的container可以互通，所以不用指定expose port，所以參照各container原始Dockerfile後，指派原本的各項container為獨立的service物件，而proxy以LoadBalancer type做為入口，這邊就省略了ingress+https的部分
 
