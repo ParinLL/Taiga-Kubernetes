@@ -31,7 +31,7 @@ spec:
           ports:
           - containerPort: 8888
           - containerPort: 3023
-          image: dokfish/taiga-events:6.2.1
+          image: dokfish/taiga-events:6.3.1
           name: taiga-events
           resources: {}
       restartPolicy: Always

@@ -29,7 +29,7 @@ spec:
         - envFrom:
           - configMapRef:
               name: variables-env
-          image: dokfish/taiga-back:6.6
+          image: dokfish/taiga-back:6.6.1
           ports:
           - containerPort: 80
           name: taiga-back

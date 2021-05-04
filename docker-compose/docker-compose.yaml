@@ -2,7 +2,7 @@ version: '3'
 
 services:
   back:
-    image: dokfish/taiga-back:6.6
+    image: dokfish/taiga-back:6.6.1
     container_name: taiga-back
     restart: unless-stopped
     depends_on:
@@ -15,10 +15,9 @@ services:
       - ./conf/back:/taiga-conf
     env_file:
       - variables.env
-    command: /bin/sh -c "apk add tzdata && ln -snf /usr/share/zoneinfo/Asia/Taipei /etc/localtime && echo Asia/Taipei > /etc/timezone && /start.sh"
 
   front:
-    image: dokfish/taiga-front:6.2
+    image: dokfish/taiga-front:6.2.1
     container_name: taiga-front
     restart: unless-stopped
     networks:
@@ -27,10 +26,9 @@ services:
       - ./conf/front:/taiga-conf
     env_file:
       - variables.env
-    command: /bin/sh -c "apk add tzdata && ln -snf /usr/share/zoneinfo/Asia/Taipei /etc/localtime && echo Asia/Taipei > /etc/timezone && /start.sh"
 
   events:
-    image: dokfish/taiga-events:6.2.1
+    image: dokfish/taiga-events:6.3.1
     container_name: taiga-events
     restart: unless-stopped
     depends_on:
@@ -39,7 +37,6 @@ services:
       - default
     env_file:
       - variables.env
-    command: /bin/sh -c "apk add tzdata && ln -snf /usr/share/zoneinfo/Asia/Taipei /etc/localtime && echo Asia/Taipei > /etc/timezone && /start.sh"
 
   db:
     image: postgres:12-alpine
@@ -53,17 +50,16 @@ services:
       - ./data/db:/var/lib/postgresql/data
 
   rabbit:
-    image: dokfish/taiga-rabbit:6.1
+    image: dokfish/taiga-rabbit:6.2
     container_name: taiga-rabbit
     restart: unless-stopped
     networks:
       - default
     env_file:
       - variables.env
-    entrypoint: /bin/sh -c "apk add tzdata && ln -snf /usr/share/zoneinfo/Asia/Taipei /etc/localtime && echo Asia/Taipei > /etc/timezone && /start.sh"
 
   proxy:
-    image: dokfish/taiga-proxy:6.2
+    image: dokfish/taiga-proxy:6.2.1
     container_name: taiga-proxy
     restart: unless-stopped
     depends_on:
@@ -80,7 +76,6 @@ services:
       - ./conf/proxy:/taiga-conf
     env_file:
       - variables.env
-    command: /bin/sh -c "apk add tzdata && ln -snf /usr/share/zoneinfo/Asia/Taipei /etc/localtime && echo Asia/Taipei > /etc/timezone && /start.sh"
 
 networks:
   default:

@@ -29,11 +29,10 @@ spec:
         - envFrom:
           - configMapRef:
               name: variables-env
-          image: dokfish/taiga-proxy:6.2
+          image: dokfish/taiga-proxy:http-v1.2
           name: taiga-proxy
           ports:
             - containerPort: 80
-            - containerPort: 443
           resources: {}
           volumeMounts:
             - mountPath: /taiga-conf
