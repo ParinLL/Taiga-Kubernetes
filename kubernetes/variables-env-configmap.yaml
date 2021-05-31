@@ -27,7 +27,6 @@ data:
   TAIGA_SECRET: secret
 kind: ConfigMap
 metadata:
-  creationTimestamp: null
   labels:
     io.kompose.service: back-variables-env
   name: variables-env
