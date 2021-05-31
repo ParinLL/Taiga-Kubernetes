@@ -4,7 +4,6 @@
 [docker-taiga](https://github.com/docker-taiga)/**[taiga](https://github.com/docker-taiga/taiga)**
 
 
-
 此專案原本是docker-compose的方式進行部署，轉換成yaml的作法是透過
 
 [kubernetes](https://github.com/kubernetes)/**[kompose](https://github.com/kubernetes/kompose)**  進行轉換
